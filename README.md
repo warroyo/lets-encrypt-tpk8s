@@ -2,6 +2,8 @@
 
 Currently there is an issue in the production version of the multi-cloud ingress trait that prevents acme from working. This workaround applies a new version of the package that has a fix to the clusters and the project. 
 
+**you will need a custom cluster group to be able to edit the ingress capabiltiy in the below document.**
+
 ## apply the package yaml to the clusters
 
 This package needs to be applied to any clusters that will be using LE.
