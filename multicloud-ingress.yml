@@ -1,0 +1,105 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  annotations:
+    capability.tanzu.vmware.com/requires: |
+      [{"name": "multicloud-ingress.tanzu.vmware.com"}]
+  creationTimestamp: null
+  labels:
+    spaces.tanzu.vmware.com/trait-package: "true"
+  name: multicloud-ingress.tanzu.vmware.com.0.1.5
+spec:
+  refName: multicloud-ingress.tanzu.vmware.com
+  releaseNotes: |
+    Initial release of the kubernetes ingress gateway trait package
+  releasedAt: "2024-05-31T02:21:21Z"
+  template:
+    spec:
+      deploy:
+      - kapp: {}
+      fetch:
+      - imgpkgBundle:
+          image: public.ecr.aws/k3s1x6v5/multicloud-ingress:0.1.5
+      template:
+      - ytt:
+          paths:
+          - carvel/
+      - kbld:
+          paths:
+          - '-'
+          - .imgpkg/images.yml
+  valuesSchema:
+    openAPIv3:
+      additionalProperties: false
+      properties:
+        domain:
+          default: null
+          nullable: true
+          type: string
+        gslb:
+          additionalProperties: false
+          nullable: true
+          properties:
+            authentication:
+              additionalProperties: false
+              nullable: true
+              properties:
+                credentialRef:
+                  default: null
+                  nullable: true
+                  type: string
+              type: object
+              required:
+              - credentialRef
+            dns:
+              additionalProperties: false
+              nullable: true
+              properties:
+                zoneId:
+                  default: null
+                  nullable: true
+                  type: string
+              type: object
+              required:
+              - zoneId
+          type: object
+          required:
+          - authentication
+          - dns
+        listenerTemplates:
+          default: null
+          items:
+            additionalProperties: false
+            properties:
+              namePrefix:
+                default: ""
+                type: string
+              port:
+                default: null
+                nullable: true
+                type: integer
+              protocol:
+                default: ""
+                type: string
+              tls:
+                additionalProperties: false
+                properties:
+                  secretRef:
+                    default: ""
+                    type: string
+                type: object
+            type: object
+          nullable: true
+          type: array
+        name:
+          default: default-gateway
+          type: string
+        useClusterIssuer:
+          default: false
+          type: boolean
+      type: object
+      required:
+      - name
+      - domain
+      - listenerTemplates
+  version: 0.1.5
