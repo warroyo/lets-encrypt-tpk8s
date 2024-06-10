@@ -1,7 +1,6 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
-  namespace: tanzu-package-repo-global
   annotations:
     capability.tanzu.vmware.com/requires: |
       [{"name": "multicloud-ingress.tanzu.vmware.com"}]
