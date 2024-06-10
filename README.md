@@ -17,7 +17,7 @@ export KUBECONFIG=./cluster.conf
 2. apply the package yaml to the cluster
 
 ```bash
-kubectl apply -f mutlicloud-ingress.yml
+kubectl apply -f mutlicloud-ingress.yml -n tanzu-package-repo-global
 ```
 
 

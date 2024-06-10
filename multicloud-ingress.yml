@@ -20,7 +20,7 @@ spec:
       - kapp: {}
       fetch:
       - imgpkgBundle:
-          image: public.ecr.aws/k3s1x6v5/multicloud-ingress:0.1.5
+          image: ghcr.io/warroyo/multicloud-ingress.tanzu.vmware.com:0.1.5
       template:
       - ytt:
           paths:
